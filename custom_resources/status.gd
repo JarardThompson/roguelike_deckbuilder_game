@@ -16,7 +16,7 @@ enum StackType {NONE, INTENSITY, DURATION}
 @export var stacks : int : set = set_stacks
 
 @export_group("Status Visuals")
-@export var ison: Texture
+@export var icon: Texture
 @export_multiline var tooltip: String
 
 func initialize_status(_target: Node) -> void:

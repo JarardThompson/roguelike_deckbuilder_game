@@ -144,14 +144,13 @@ func _setup_room_types() -> void:
 			room.type = Room.Type.MONSTER
 			room.battle_stats = battle_stats_pool.get_random_battle_for_tier(0)
 	
-	# 9th floor is always treasure
-	@warning_ignore("integer_division")
-	for room: Room in map_data[FLOORS / 2]:
+	# 8th floor is always treasure
+	for room: Room in map_data[7]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.TREASURE
 	
 	# 14th floor is always a campfire
-	for room: Room in map_data[FLOORS - 2]:
+	for room: Room in map_data[13]:
 		if room.next_rooms.size() > 0:
 			room.type = Room.Type.CAMPFIRE
 	

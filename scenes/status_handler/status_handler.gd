@@ -28,14 +28,6 @@ func apply_statuses_by_type(type: Status.Type) -> void:
 	tween.finished.connect(func(): statuses_applied.emit(type))
 
 func add_status(status: Status) -> void:
-	if status == null:
-		print("Status is null in add_status")
-		return
-	
-	if STATUS_UI == null:
-		print("STATUS_UI is null in add_status")
-		return
-	
 	var stackable := status.stack_type != Status.StackType.NONE
 	
 	# Add if it is new
@@ -84,3 +76,8 @@ func _get_all_statuses() -> Array[Status]:
 func _on_status_applied(status: Status) -> void:
 	if status.can_expire:
 		status.duration -= 1
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_mouse"):
+		Events.status_tooltip_requested.emit(_get_all_statuses())

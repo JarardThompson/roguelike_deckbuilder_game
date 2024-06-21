@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TrueStrenghtStatus" load_steps=3 format=3 uid="uid://dtmbqjfova4aw"]
+
+[ext_resource type="Texture2D" uid="uid://cn2c1psh561cc" path="res://art/tile_0127.png" id="1_16dun"]
+[ext_resource type="Script" path="res://statuses/true_strength.gd" id="2_k8sec"]
+
+[resource]
+script = ExtResource("2_k8sec")
+id = "true_strength"
+type = 0
+stack_type = 0
+can_expire = false
+duration = 0
+stacks = 0
+icon = ExtResource("1_16dun")
+tooltip = "True Strength: at the start of your turn, gain 2 Strength"

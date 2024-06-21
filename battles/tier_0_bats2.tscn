@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cukmp3b2rk1vt"]
 
-[ext_resource type="PackedScene" uid="uid://d0efyathkfg74" path="res://scenes/enemy/1enemy.tscn" id="1_hmqjl"]
+[ext_resource type="PackedScene" uid="uid://d0efyathkfg74" path="res://scenes/enemy/enemy.tscn" id="1_hmqjl"]
 [ext_resource type="Resource" uid="uid://bbo24od4aavfj" path="res://enemies/bat/bat_enemy.tres" id="2_1osul"]
 
 [node name="Tier0Bats2" type="Node2D"]

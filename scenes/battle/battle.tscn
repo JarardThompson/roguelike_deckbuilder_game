@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cahno8aso5net"]
+[gd_scene load_steps=24 format=3 uid="uid://cahno8aso5net"]
 
 [ext_resource type="Script" path="res://scenes/battle/battle.gd" id="1_4s751"]
 [ext_resource type="PackedScene" uid="uid://d0efyathkfg74" path="res://scenes/enemy/enemy.tscn" id="2_02s5s"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dfig8d63ggof1" path="res://scenes/ui/battle_over_panel.tscn" id="17_xrby7"]
 [ext_resource type="Texture2D" uid="uid://ctrg8e6e44wyt" path="res://art/discard.png" id="18_br75x"]
 [ext_resource type="PackedScene" uid="uid://dybw7dwnr1wfk" path="res://scenes/ui/card_pile_view.tscn" id="21_6hut4"]
+[ext_resource type="PackedScene" uid="uid://c5pfvuutdvtdh" path="res://scenes/ui/status_view.tscn" id="22_aopfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xyg5u"]
 size = Vector2(256, 100)
@@ -61,7 +62,7 @@ position = Vector2(234, 66)
 stats = ExtResource("8_d4c2d")
 
 [node name="Player" parent="." instance=ExtResource("3_dpj45")]
-position = Vector2(45, 80)
+position = Vector2(45, 65)
 stats = ExtResource("4_fwb8a")
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("3_vyv1n")]
@@ -74,7 +75,7 @@ hand = NodePath("../BattleUI/Hand")
 [node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
 script = ExtResource("7_18vit")
 
-[node name="Hand" type="HBoxContainer" parent="BattleUI"]
+[node name="Hand" type="HBoxContainer" parent="BattleUI" node_paths=PackedStringArray("player")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -87,9 +88,12 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 script = ExtResource("2_uaw60")
+player = NodePath("../../Player")
 
 [node name="ManaUI" parent="BattleUI" instance=ExtResource("11_2vu01")]
+offset_left = 5.0
 offset_top = -42.0
+offset_right = 23.0
 offset_bottom = -24.0
 
 [node name="Tooltip" parent="BattleUI" instance=ExtResource("12_qx741")]
@@ -191,4 +195,10 @@ visible = false
 
 [node name="DiscardPileView" parent="CardPileViews" instance=ExtResource("21_6hut4")]
 unique_name_in_owner = true
+visible = false
+
+[node name="StatusViewLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="StatusView" parent="StatusViewLayer" instance=ExtResource("22_aopfv")]
 visible = false
