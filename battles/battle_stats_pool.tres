@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleStatsPool" load_steps=6 format=3 uid="uid://dw0vjhe6lp52l"]
+
+[ext_resource type="Resource" uid="uid://b8ccnq3wp1gcn" path="res://battles/tier_0_bats2.tres" id="1_6re86"]
+[ext_resource type="Script" path="res://custom_resources/battle_stats_pool.gd" id="1_yhdqh"]
+[ext_resource type="Resource" uid="uid://bsm52j3mkcpvu" path="res://battles/tier_0_crab.tres" id="2_i7qyn"]
+[ext_resource type="Resource" uid="uid://y2qrxei447n7" path="res://battles/tier_1_bats3.tres" id="3_30iws"]
+[ext_resource type="Resource" uid="uid://brfe0q3jcgxyc" path="res://battles/tier_1_bat_crab.tres" id="4_u66bk"]
+
+[resource]
+script = ExtResource("1_yhdqh")
+pool = Array[Resource("res://custom_resources/battle_stats.gd")]([ExtResource("1_6re86"), ExtResource("2_i7qyn"), ExtResource("3_30iws"), ExtResource("4_u66bk")])
