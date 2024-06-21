@@ -8,10 +8,12 @@ extends Control
 @onready var stacks: Label = $Stacks
 
 func set_status(new_status: Status) -> void:
-	if not is_node_ready():
-		await ready
-	
 	status = new_status
+	if not is_inside_tree():
+		await_to_be_inside_tree()
+	update_status_ui()
+
+func update_status_ui() -> void:
 	icon.texture = status.icon
 	duration.visible = status.stack_type == Status.StackType.DURATION
 	stacks.visible = status.stack_type == Status.StackType.INTENSITY
@@ -26,6 +28,10 @@ func set_status(new_status: Status) -> void:
 		status.status_changed.connect(_on_status_changed)
 	
 	_on_status_changed()
+
+func await_to_be_inside_tree() -> void:
+	while not is_inside_tree():
+		await get_tree().process_frame
 
 func _on_status_changed() -> void:
 	if not status:

@@ -4,6 +4,10 @@ extends Effect
 var status: Status
 
 func execute(targets: Array[Node]) -> void:
+	if status == null:
+		print("Status is null in StatusEffect.execute")
+		return
+	
 	for target in targets:
 		if not target:
 			continue

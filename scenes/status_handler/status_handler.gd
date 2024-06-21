@@ -4,7 +4,7 @@ extends GridContainer
 signal statuses_applied(type: Status.Type)
 
 const STATUS_APPLY_INTERVAL := 0.25
-const STATUS_UI = preload("res://scenes/status_handler/status_handler.tscn")
+const STATUS_UI = preload("res://scenes/status_handler/status_ui.tscn")
 
 @export var status_owner: Node2D
 
@@ -28,6 +28,14 @@ func apply_statuses_by_type(type: Status.Type) -> void:
 	tween.finished.connect(func(): statuses_applied.emit(type))
 
 func add_status(status: Status) -> void:
+	if status == null:
+		print("Status is null in add_status")
+		return
+	
+	if STATUS_UI == null:
+		print("STATUS_UI is null in add_status")
+		return
+	
 	var stackable := status.stack_type != Status.StackType.NONE
 	
 	# Add if it is new
