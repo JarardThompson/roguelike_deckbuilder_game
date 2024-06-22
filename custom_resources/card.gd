@@ -18,6 +18,7 @@ const RARITY_COLORS := {
 @export var target: Target
 @export var cost: int
 @export var exhausts: bool = false
+@export var shopcost: int
 
 @export_group("Card Visuals")
 @export var icon: Texture

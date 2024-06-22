@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RunStats" load_steps=2 format=3 uid="uid://b4kk2hiybfm4f"]
+
+[ext_resource type="Script" path="res://custom_resources/run_stats.gd" id="1_rd6sd"]
+
+[resource]
+script = ExtResource("1_rd6sd")
+gold = 500
+card_rewards = 3
+common_weight = 6.0
+uncommon_weight = 3.7
+rare_weight = 0.3

@@ -167,6 +167,7 @@ stretch_mode = 5
 [node name="WizardButton" type="Button" parent="CharacterButtons"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_xaqbn")
 
@@ -190,6 +191,7 @@ stretch_mode = 5
 [node name="RogueButton" type="Button" parent="CharacterButtons"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+disabled = true
 toggle_mode = true
 button_group = SubResource("ButtonGroup_xaqbn")
 

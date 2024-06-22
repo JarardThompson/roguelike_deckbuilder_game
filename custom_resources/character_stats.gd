@@ -11,21 +11,19 @@ extends Stats
 @export var draftable_cards: CardPile
 @export var cards_per_turn: int
 @export var max_mana: int
+@export var starting_relic: Relic
 
 var mana: int : set = set_mana
 var deck: CardPile
 var discard: CardPile
 var draw_pile: CardPile
 
-
 func set_mana(value: int) -> void:
 	mana = value
 	stats_changed.emit()
 
-
 func reset_mana() -> void:
 	mana = max_mana
-
 
 func take_damage(damage: int) -> void:
 	var initial_health := health
@@ -33,10 +31,8 @@ func take_damage(damage: int) -> void:
 	if initial_health > health:
 		Events.player_hit.emit()
 
-
 func can_play_card(card: Card) -> bool:
 	return mana >= card.cost
-
 
 func create_instance() -> Resource:
 	var instance: CharacterStats = self.duplicate()

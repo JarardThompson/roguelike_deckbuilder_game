@@ -30,6 +30,9 @@ signal status_tooltip_requested(statuses: Array[Status])
 signal map_exited(room: Room)
 
 # Shop-related events
+signal shop_entered(shop: Shop)
+signal shop_relic_bought(relic: Relic, gold_cost: int)
+signal shop_card_bought(card: Card, gold_cost: int)
 signal shop_exited
 
 # Campfire-related events
@@ -40,3 +43,6 @@ signal battle_reward_exited
 
 # Treasure Room-related events
 signal treasure_room_exited
+
+# Relic-related events
+signal relic_tooltip_requested(relic: Relic)

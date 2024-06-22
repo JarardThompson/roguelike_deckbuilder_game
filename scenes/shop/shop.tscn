@@ -1,6 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://kjvuo2p83850"]
+[gd_scene load_steps=19 format=3 uid="uid://kjvuo2p83850"]
 
 [ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1_bcltt"]
+[ext_resource type="Texture2D" uid="uid://bj3im6egs4wxx" path="res://art/tile_0086.png" id="2_e3x5c"]
+[ext_resource type="Resource" uid="uid://c8ijp8qlwjd6u" path="res://relics/coupons.tres" id="2_nyr4d"]
+[ext_resource type="Resource" uid="uid://kyp0s4lad2tl" path="res://relics/expolsive_barrel.tres" id="3_c77il"]
+[ext_resource type="Texture2D" uid="uid://cfu85yjhuwfwi" path="res://art/shopkeeper_blink.png" id="3_rros8"]
+[ext_resource type="Resource" uid="uid://dctudkvqwfbir" path="res://relics/mana_potion.tres" id="4_iepdj"]
+[ext_resource type="PackedScene" uid="uid://ydklcoxwl85n" path="res://scenes/shop/shop_card.tscn" id="4_ruwc5"]
+[ext_resource type="PackedScene" uid="uid://phdxhvrr1all" path="res://scenes/ui/card_tooltip_popup.tscn" id="5_awiqq"]
+[ext_resource type="Resource" uid="uid://xg8dtkfyoajx" path="res://relics/reinforced_armor.tres" id="5_of7u7"]
+[ext_resource type="PackedScene" uid="uid://dpjjg8qg8vlcf" path="res://scenes/shop/shop_relic.tscn" id="5_weuo3"]
+[ext_resource type="PackedScene" uid="uid://tnmr7mdcoq86" path="res://scenes/modifier_handler/modifier_handler.tscn" id="11_teg0k"]
+[ext_resource type="PackedScene" uid="uid://brti8c14g4ubj" path="res://scenes/modifier_handler/modifier.tscn" id="12_seo8g"]
+
+[sub_resource type="Gradient" id="Gradient_3due5"]
+offsets = PackedFloat32Array(0.325472, 1)
+colors = PackedColorArray(0.114897, 0.114897, 0.114897, 1, 0.4, 0.219608, 0.203922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ji04g"]
+gradient = SubResource("Gradient_3due5")
+fill_from = Vector2(0.5, 0.125)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 8
+
+[sub_resource type="Animation" id="Animation_5q8n6"]
+resource_name = "blink"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopKeeper:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_rros8"), ExtResource("2_e3x5c")]
+}
+
+[sub_resource type="Animation" id="Animation_0kp3q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopKeeper:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_e3x5c")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6bt2"]
+_data = {
+"RESET": SubResource("Animation_0kp3q"),
+"blink": SubResource("Animation_5q8n6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_wsv0a"]
+font_size = 12
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -11,37 +74,128 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_bcltt")
+shop_relics = Array[Resource("res://custom_resources/relic.gd")]([ExtResource("2_nyr4d"), ExtResource("3_c77il"), ExtResource("4_iepdj"), ExtResource("5_of7u7")])
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 144.0
-mouse_filter = 2
-color = Color(0.0980392, 0.0980392, 0.0980392, 0.87451)
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="Background" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ji04g")
+
+[node name="DecorationLayer" type="CanvasLayer" parent="."]
+
+[node name="ShopKeeper" type="TextureRect" parent="DecorationLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -88.0
+offset_right = 88.0
+offset_bottom = -8.0
+grow_vertical = 0
+texture = ExtResource("2_e3x5c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShopKeeperAnimation" type="AnimationPlayer" parent="DecorationLayer"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_x6bt2")
+}
+
+[node name="BlinkTimer" type="Timer" parent="DecorationLayer"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Title" type="Label" parent="UILayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = 25.0
+offset_top = -50.0
+offset_right = 65.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
 text = "Shop"
+label_settings = SubResource("LabelSettings_wsv0a")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 13)
-layout_mode = 2
-text = "Return"
+[node name="BackButton" type="Button" parent="UILayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -31.0
+offset_right = -60.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Leave"
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="ShopContent" type="VBoxContainer" parent="UILayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -35.0
+offset_right = 119.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cards" type="HBoxContainer" parent="UILayer/ShopContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="ShopCard" parent="UILayer/ShopContent/Cards" instance=ExtResource("4_ruwc5")]
+layout_mode = 2
+
+[node name="ShopCard2" parent="UILayer/ShopContent/Cards" instance=ExtResource("4_ruwc5")]
+layout_mode = 2
+
+[node name="ShopCard3" parent="UILayer/ShopContent/Cards" instance=ExtResource("4_ruwc5")]
+layout_mode = 2
+
+[node name="Relics" type="HBoxContainer" parent="UILayer/ShopContent"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ShopRelic" parent="UILayer/ShopContent/Relics" instance=ExtResource("5_weuo3")]
+layout_mode = 2
+
+[node name="ShopRelic2" parent="UILayer/ShopContent/Relics" instance=ExtResource("5_weuo3")]
+layout_mode = 2
+
+[node name="ShopRelic3" parent="UILayer/ShopContent/Relics" instance=ExtResource("5_weuo3")]
+layout_mode = 2
+
+[node name="CardTooltipPopup" parent="UILayer" instance=ExtResource("5_awiqq")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ModifierHandler" parent="." instance=ExtResource("11_teg0k")]
+
+[node name="ShopCostModifier" parent="ModifierHandler" instance=ExtResource("12_seo8g")]
+type = 3
+
+[connection signal="pressed" from="UILayer/BackButton" to="." method="_on_back_button_pressed"]
