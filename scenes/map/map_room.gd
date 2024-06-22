@@ -30,7 +30,6 @@ func set_available(new_value: bool) -> void:
 func set_room(new_data: Room) -> void:
 	room = new_data
 	position = room.position
-	line_2d.rotation_degrees = randi_range(0, 360)
 	sprite_2d.texture = ICONS[room.type][0]
 	sprite_2d.scale = ICONS[room.type][1]
 

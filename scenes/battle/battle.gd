@@ -34,6 +34,8 @@ func start_battle() -> void:
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_type(Relic.Type.START_OF_COMBAT)
 
+
+
 func _on_enemies_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):
 		relics.activate_relics_by_type(Relic.Type.END_OF_COMBAT)

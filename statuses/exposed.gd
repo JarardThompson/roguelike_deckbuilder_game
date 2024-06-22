@@ -6,7 +6,7 @@ const MODIFIER := 0.5
 func get_tooltip() -> String:
 	return tooltip % duration
 
-func initialze_status(target: Node) -> void:
+func initialize_status (target: Node) -> void:
 	assert(target.get("modifier_handler"), "No modifiers on %s" % target)
 	
 	var dmg_taken_modifier: Modifier = target.modifier_handler.get_modifier(Modifier.Type.DMG_TAKEN)
