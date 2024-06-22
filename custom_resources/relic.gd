@@ -10,7 +10,6 @@ enum CharacterType {ALL, ROGUE, WARRIOR, WIZARD}
 @export var character_type: CharacterType
 @export var starter_relic: bool = false
 @export var icon: Texture
-@export var shopcost: int
 
 @export_multiline var tooltip: String
 

@@ -40,10 +40,6 @@ func add_card_reward() -> void:
 	rewards.add_child.call_deferred(card_reward)
 
 func add_relic_reward(relic: Relic) -> void:
-	if not relic or not relic.icon:
-		print("Relic or its icon is null.")
-	return
-	
 	var relic_reward := REWARD_BUTTON.instantiate() as RewardButton
 	relic_reward.reward_icon = relic.icon
 	relic_reward.reward_text = relic.relic_name
